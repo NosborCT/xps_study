@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  ativo     Boolean  @default(true)
+  senha     String
+  email     String   @unique
+}
+
+model Aluno {
+  id                  String                @id @default(uuid())
+  name                String
+  createdAt           DateTime              @default(now())
+  ativo               Boolean               @default(true)
+  senha               String
+  email               String                @unique
+  turmas              Turma[]
+  mensagensRecebidas  Mensagem[]
+  itensVinculados     Item[]
+  atividades          Atividade[]
+  missoes             Missao[]
+  respostasMissoes    Missao_resposta[]
+}
+
+model Professor {
+  id                String      @id @default(uuid())
+  name              String
+  createdAt         DateTime    @default(now())
+  ativo             Boolean     @default(true)
+  senha             String
+  email             String      @unique
+  turmas            Turma[]
+  mensagensCriadas  Mensagem[]
+  itensCriados      Item[]
+  atividades        Atividade[]
+  missoes           Missao[]
+}
+
+model Turma {
+  id            String       @id @default(uuid())
+  name          String
+  descricao     String
+  ano           String
+  ativo         Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+  alunoID       String
+  aluno         Aluno        @relation(fields: [alunoID], references: [id])
+  professorID   String
+  professor     Professor    @relation(fields: [professorID], references: [id])
+  atividades    Atividade[]
+  missoes       Missao[]
+}
+
+model Mensagem {
+  id           String     @id @default(uuid())
+  professorID  String
+  professor    Professor  @relation(fields: [professorID], references: [id])
+  createdAt    DateTime   @default(now())
+  alunoID      String
+  aluno        Aluno      @relation(fields: [alunoID], references: [id])
+}
+
+model Item {
+  id              String     @id @default(uuid())
+  idCriador       String
+  professor       Professor  @relation(fields: [idCriador], references: [id])
+  nome            String
+  descricao       String
+  ativo           Boolean    @default(true)
+  passiva         String 
+  createdAt       DateTime   @default(now())
+  alunoID         String
+  aluno           Aluno      @relation(fields: [alunoID], references: [id])
+  passes          Passe[]
+  recompensas     Missao[]
+}
+
+model Passe {
+  id         String   @id @default(uuid())
+  itemId     String
+  item       Item     @relation(fields: [itemId], references: [id])
+}
+
+model Atividade {
+  id             String              @id @default(uuid())
+  nome           String
+  descricao      String
+  pontos         Int
+  createdAt      DateTime            @default(now())
+  idCriador      String
+  professor      Professor           @relation(fields: [idCriador], references: [id])
+  alunoID        String
+  aluno          Aluno               @relation(fields: [alunoID], references: [id])
+  turmaID        String
+  turma          Turma               @relation(fields: [turmaID], references: [id])
+}
+model Missao {
+  id              String           @id @default(uuid())
+  nome            String
+  descricao       String
+  pontos          Int
+  ativo           Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  professorID     String
+  professor       Professor        @relation(fields: [professorID], references: [id])
+  alunoID         String
+  aluno           Aluno            @relation(fields: [alunoID], references: [id])
+  recompensaItemID String
+  recompensaItem  Item             @relation(fields: [recompensaItemID], references: [id])
+  turmaID         String
+  turma           Turma            @relation(fields: [turmaID], references: [id])
+  respostas       Missao_resposta[]
+}
+
+model Missao_resposta {
+  id          String   @id @default(uuid())
+  nomeAluno   String
+  aluno       Aluno    @relation(fields: [nomeAluno], references: [id])
+  resposta    String
+  data        DateTime @default(now())
+  missaoID    String
+  missao      Missao   @relation(fields: [missaoID], references: [id])
+}
