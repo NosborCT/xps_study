@@ -67,12 +67,14 @@ const Header = () => {
                         </Button>
                     </div>
                     <div>
+                        <Link href={`/home/`}>
                         <Button 
                             variant={"default"}
                             className="w-full justify-start gap-2 text-white">
                             <HomeIcon size={16} />
                             Home 
                         </Button>
+                        </Link>
                     </div>
                 </div>
             </SheetContent>
