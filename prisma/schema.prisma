@@ -62,6 +62,7 @@ model Turma {
 
 model Mensagem {
   id           String     @id @default(uuid())
+  conteudo_mensagem    String
   professorID  String
   professor    Professor  @relation(fields: [professorID], references: [id])
   createdAt    DateTime   @default(now())
