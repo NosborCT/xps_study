@@ -1,90 +1,112 @@
 import { Button } from "@/app/_components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardDescription,
-  CardFooter,
-} from "@/app/_components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/app/_components/ui/card";
 import { Input } from "@/app/_components/ui/input";
 import { Label } from "@/app/_components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/app/_components/ui/select";
-import prisma from "@/app/_lib/prisma";
 import { Separator } from "@/app/_components/ui/separator";
-
-
+import prisma from "@/app/_lib/prisma";
+import { Textarea } from "@/app/_components/ui/textarea";
+import Header from "@/app/_components/header";
+import ProfessorList from "@/app/_components/professor-list";
+import AlunoList from "@/app/_components/aluno-list";
+import { connect } from "http2";
 
 const CadastroAtividade = () => {
   async function createTask(formData: FormData) {
     "use server";
-    const name = formData.get("name")?.toString();
+    const nome = formData.get("nome")?.toString();
     const descricao = formData.get("descricao")?.toString();
-    const prioridade = formData.get("prioridade")?.toString();
+    const pontosStr = formData.get("pontos")?.toString();
+    const professorId = formData.get("professor")?.toString();
+    const alunoId = formData.get("aluno")?.toString();
 
-    console.log({ name, descricao, prioridade });
+    // Convert pontos to number
+    const pontos = pontosStr ? parseInt(pontosStr, 10) : 0;
+
+    if (!nome || !descricao || !pontos || !professorId || !alunoId) {
+      console.error("Dados inválidos para criação de atividade.");
+      return;
+    }
+
+    try {
+      const newAtividade = await prisma.atividade.create({
+        data: {
+          nome: nome,
+          descricao: descricao,
+          pontos: pontos,
+          professor: {
+            connect: { id: professorId },
+          },
+          aluno: {
+            connect: {id : alunoId},
+          }
+        },
+      });
+      console.log('Atividade cadastrada com sucesso:', newAtividade);
+    } catch (error) {
+      console.error('Erro ao cadastrar atividade:', error);
+    }
   }
 
   return (
-    <div className="flex  items-center">
+    <div>
+      <Header />
       <form action={createTask}>
-        <Card className=" mx-auto w-80 h-auto my-[230px]">
+        <Card className="mx-auto w-80 h-auto my-[230px]">
           <CardHeader className="flex items-center">
-            <CardTitle>Cadastro de Aluno</CardTitle>
+            <CardTitle>Cadastro de Atividade</CardTitle>
           </CardHeader>
 
           <Separator />
 
-          <CardContent className="py-6 flex flex-col space-y-4  ">
+          <CardContent className="py-6 flex flex-col space-y-4">
             <div>
-              <Label htmlFor="name">Nome</Label>
+              <Label htmlFor="nome">Titulo Atividade</Label>
               <Input
-                id="name"
-                name="name"
+                id="nome"
+                name="nome"
                 type="text"
-                placeholder="Nome Completo"
-                className="bg-white drop-shadow-md"
-              />
-            </div>
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="text"
-                placeholder="email"
+                placeholder="Titulo Atividade"
                 className="bg-white drop-shadow-md"
               />
             </div>
 
+            
             <div>
-              <Label htmlFor="password">Senha</Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="senha"
+              <Label htmlFor="descricao">Descrição da atividade</Label>
+              <Textarea
+                id="descricao"
+                name="descricao"
+                placeholder="descrição"
                 className="bg-white drop-shadow-md"
               />
+            </div>
+            <div>
+              <Label htmlFor="professor">Selecione o professor</Label>
+              <select id="professor" name="professor" className="bg-white drop-shadow-md">
+                <ProfessorList />
+              </select>
             </div>
 
             <div>
-              <Label htmlFor="turma">Turma</Label>
-              <Input
-                id="turma"
-                name="turma"
-                type="text"
-                placeholder="turma"
-                className="bg-white drop-shadow-md"
-              />
+              <Label htmlFor="aluno">Selecione o aluno</Label>
+              <select id="aluno" name="aluno" className="bg-white drop-shadow-md">
+                <AlunoList/>
+              </select>
             </div>
-            <Button type="submit" className="max-w-28 text-center ">
+
+            <div>
+              <Label htmlFor="pontos">Qtd.Pontos</Label>
+              <select id="pontos" name="pontos" className="bg-white drop-shadow-md">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+            <Button type="submit" className="max-w-28 text-center">
               Salvar
             </Button>
           </CardContent>

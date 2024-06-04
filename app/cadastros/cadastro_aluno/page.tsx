@@ -1,6 +1,11 @@
 import Header from "@/app/_components/header";
 import { Button } from "@/app/_components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/app/_components/ui/card";
 import { Input } from "@/app/_components/ui/input";
 import { Label } from "@/app/_components/ui/label";
 import { Separator } from "@/app/_components/ui/separator";
@@ -13,16 +18,16 @@ const CadastroAluno = () => {
     const email = formData.get("email")?.toString();
     const password = formData.get("password")?.toString();
 
-    console.log({ name, email, password});
+    console.log({ name, email, password });
 
-    if (!name || !email || !password ) {
+    if (!name || !email || !password) {
       return;
     }
 
     try {
-      
       // Verificar se o ID da turma existe
-      {/* 
+      {
+        /* 
     
       const turma = await prisma.turma.findUnique({
         where: { id: name },
@@ -33,20 +38,19 @@ const CadastroAluno = () => {
       }
     
     
-    */}
-
+    */
+      }
 
       const newTask = await prisma.aluno.create({
         data: {
           name: name,
           email: email,
           password: password,
-          
         },
       });
-      console.log('Aluno cadastrado com sucesso:', newTask);
+      console.log("Aluno cadastrado com sucesso:", newTask);
     } catch (error) {
-      console.error('Erro ao cadastrar aluno:', error);
+      console.error("Erro ao cadastrar aluno:", error);
     }
   }
 

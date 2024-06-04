@@ -97,13 +97,14 @@ model Atividade {
   descricao String
   pontos    Int
   createdAt DateTime  @default(now())
-  idCriador String
-  professor Professor @relation(fields: [idCriador], references: [id])
-  alunoID   String
-  aluno     Aluno     @relation(fields: [alunoID], references: [id])
-  turmaID   String
-  turma     Turma     @relation(fields: [turmaID], references: [id])
+  idCriador String?
+  professor Professor? @relation(fields: [idCriador], references: [id])
+  alunoID   String?
+  aluno     Aluno?     @relation(fields: [alunoID], references: [id])
+  turmaID   String?
+  turma     Turma?     @relation(fields: [turmaID], references: [id])
 }
+
 
 model Missao {
   id               String            @id @default(uuid())
@@ -112,14 +113,14 @@ model Missao {
   pontos           Int
   ativo            Boolean           @default(true)
   createdAt        DateTime          @default(now())
-  professorID      String
-  professor        Professor         @relation(fields: [professorID], references: [id])
-  alunoID          String
-  aluno            Aluno             @relation(fields: [alunoID], references: [id])
-  recompensaItemID String
-  recompensaItem   Item              @relation(fields: [recompensaItemID], references: [id])
-  turmaID          String
-  turma            Turma             @relation(fields: [turmaID], references: [id])
+  professorID      String?
+  professor        Professor?         @relation(fields: [professorID], references: [id])
+  alunoID          String?
+  aluno            Aluno?             @relation(fields: [alunoID], references: [id])
+  recompensaItemID String?
+  recompensaItem   Item?              @relation(fields: [recompensaItemID], references: [id])
+  turmaID          String?
+  turma            Turma?             @relation(fields: [turmaID], references: [id])
   respostas        Missao_resposta[]
 }
 
