@@ -9,6 +9,8 @@ import Header from "@/app/_components/header";
 import ProfessorList from "@/app/_components/professor-list";
 import AlunoList from "@/app/_components/aluno-list";
 import { connect } from "http2";
+import { Turma } from '@prisma/client';
+import TurmaList from "@/app/_components/turma-list";
 
 const CadastroAtividade = () => {
   async function createTask(formData: FormData) {
@@ -18,6 +20,8 @@ const CadastroAtividade = () => {
     const pontosStr = formData.get("pontos")?.toString();
     const professorId = formData.get("professor")?.toString();
     const alunoId = formData.get("aluno")?.toString();
+    const TurmaId = formData.get("turma")?.toString();
+
 
     // Convert pontos to number
     const pontos = pontosStr ? parseInt(pontosStr, 10) : 0;
@@ -38,6 +42,9 @@ const CadastroAtividade = () => {
           },
           aluno: {
             connect: {id : alunoId},
+          },
+          turma: {
+            connect: {id : TurmaId},
           }
         },
       });
@@ -91,6 +98,13 @@ const CadastroAtividade = () => {
               <Label htmlFor="aluno">Selecione o aluno</Label>
               <select id="aluno" name="aluno" className="bg-white drop-shadow-md">
                 <AlunoList/>
+              </select>
+            </div>
+
+            <div>
+              <Label htmlFor="turma">Selecione a Turma</Label>
+              <select id="turma" name="turma" className="bg-white drop-shadow-md">
+                <TurmaList/>
               </select>
             </div>
 
