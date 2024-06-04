@@ -37,6 +37,16 @@ const Header = () => {
                         </Link>
                     </div>
                     <div>
+                        <Link href={`/cadastros/cadastro_atividade/`}>
+                        <Button 
+                            variant={"default"}
+                            className="w-full justify-start gap-2 text-white">
+                            <Send size={16} />
+                            Cadastrar Atividade
+                        </Button>
+                        </Link>
+                    </div>
+                    <div>
                         <Link href={`/cadastros/cadastro_mensagem/`}>
                         <Button 
                             variant={"default"}

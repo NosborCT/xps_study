@@ -1,67 +1,47 @@
-import Header from "@/app/_components/header";
 import { Button } from "@/app/_components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+  CardFooter,
+} from "@/app/_components/ui/card";
 import { Input } from "@/app/_components/ui/input";
 import { Label } from "@/app/_components/ui/label";
-import { Separator } from "@/app/_components/ui/separator";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/app/_components/ui/select";
 import prisma from "@/app/_lib/prisma";
+import { Separator } from "@/app/_components/ui/separator";
 
-const CadastroAluno = () => {
+
+
+const CadastroAtividade = () => {
   async function createTask(formData: FormData) {
     "use server";
     const name = formData.get("name")?.toString();
-    const email = formData.get("email")?.toString();
-    const password = formData.get("password")?.toString();
+    const descricao = formData.get("descricao")?.toString();
+    const prioridade = formData.get("prioridade")?.toString();
 
-    console.log({ name, email, password});
-
-    if (!name || !email || !password ) {
-      return;
-    }
-
-    try {
-      
-      // Verificar se o ID da turma existe
-      {/* 
-    
-      const turma = await prisma.turma.findUnique({
-        where: { id: name },
-      });
-      if (!turma) {
-        console.error('Turma não encontrada');
-        return;
-      }
-    
-    
-    */}
-
-
-      const newTask = await prisma.aluno.create({
-        data: {
-          name: name,
-          email: email,
-          password: password,
-          
-        },
-      });
-      console.log('Aluno cadastrado com sucesso:', newTask);
-    } catch (error) {
-      console.error('Erro ao cadastrar aluno:', error);
-    }
+    console.log({ name, descricao, prioridade });
   }
 
   return (
-    <div>
-      <Header />
+    <div className="flex  items-center">
       <form action={createTask}>
-        <Card className="mx-auto w-80 h-auto my-[230px]">
+        <Card className=" mx-auto w-80 h-auto my-[230px]">
           <CardHeader className="flex items-center">
             <CardTitle>Cadastro de Aluno</CardTitle>
           </CardHeader>
 
           <Separator />
 
-          <CardContent className="py-6 flex flex-col space-y-4">
+          <CardContent className="py-6 flex flex-col space-y-4  ">
             <div>
               <Label htmlFor="name">Nome</Label>
               <Input
@@ -94,7 +74,17 @@ const CadastroAluno = () => {
               />
             </div>
 
-            <Button type="submit" className="max-w-28 text-center">
+            <div>
+              <Label htmlFor="turma">Turma</Label>
+              <Input
+                id="turma"
+                name="turma"
+                type="text"
+                placeholder="turma"
+                className="bg-white drop-shadow-md"
+              />
+            </div>
+            <Button type="submit" className="max-w-28 text-center ">
               Salvar
             </Button>
           </CardContent>
@@ -104,4 +94,4 @@ const CadastroAluno = () => {
   );
 };
 
-export default CadastroAluno;
+export default CadastroAtividade;
