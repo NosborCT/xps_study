@@ -20,8 +20,9 @@ const Footer = () => {
                         <BadgePlusIcon size="68px"/>
                     </Button>
                 <div className="flex space-x-11  mr-10 mt-5">
-                <BarChart4 color="white"/>
+                <BarChart4 color="white"/>                
                 <ClipboardListIcon color="white"/>
+            
                 </div>
 
             </div>

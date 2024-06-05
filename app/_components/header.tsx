@@ -1,4 +1,4 @@
-import { BarChart4, HomeIcon, MenuIcon, Send, UserPlus, UsersRound } from "lucide-react";
+import { BarChart4, ClipboardListIcon, HomeIcon, MenuIcon, Send, UserPlus, UsersRound } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet";
 import Image from "next/image";
@@ -41,7 +41,7 @@ const Header = () => {
                         <Button 
                             variant={"default"}
                             className="w-full justify-start gap-2 text-white">
-                            <Send size={16} />
+                            <ClipboardListIcon size={16} />
                             Cadastrar Atividade
                         </Button>
                         </Link>

@@ -10,8 +10,10 @@ import { Input } from "@/app/_components/ui/input";
 import { Label } from "@/app/_components/ui/label";
 import { Separator } from "@/app/_components/ui/separator";
 import prisma from "@/app/_lib/prisma";
+import { redirect } from "next/navigation";
 
 const CadastroAluno = () => {
+
   async function createTask(formData: FormData) {
     "use server";
     const name = formData.get("name")?.toString();
@@ -25,22 +27,6 @@ const CadastroAluno = () => {
     }
 
     try {
-      // Verificar se o ID da turma existe
-      {
-        /* 
-    
-      const turma = await prisma.turma.findUnique({
-        where: { id: name },
-      });
-      if (!turma) {
-        console.error('Turma não encontrada');
-        return;
-      }
-    
-    
-    */
-      }
-
       const newTask = await prisma.aluno.create({
         data: {
           name: name,
@@ -48,10 +34,14 @@ const CadastroAluno = () => {
           password: password,
         },
       });
+
+      
       console.log("Aluno cadastrado com sucesso:", newTask);
+      
     } catch (error) {
       console.error("Erro ao cadastrar aluno:", error);
     }
+    redirect('/cadastros/cadastro_aluno/')
   }
 
   return (
@@ -98,7 +88,7 @@ const CadastroAluno = () => {
               />
             </div>
 
-            <Button type="submit" className="max-w-28 text-center">
+            <Button type="submit" className="max-w-28 text-center" >
               Salvar
             </Button>
           </CardContent>
