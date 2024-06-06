@@ -1,7 +1,6 @@
 import AtividadeList from "../_components/atividade-list";
 import Footer from "../_components/footer";
 import Header from "../_components/header";
-import { Card } from "../_components/ui/card";
 import { Separator } from "../_components/ui/separator";
 
 const Home = () => {
@@ -22,7 +21,7 @@ const Home = () => {
         </div>
         
       </div>
-      <div className=" pt-24">
+      <div className="  pt-48">
             <Footer />
         </div>
     </div>

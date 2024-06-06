@@ -29,6 +29,7 @@ model Aluno {
   atividades         Atividade[]
   missoes            Missao[]
   respostasMissoes   Missao_resposta[]
+  respostaAtividade Atividade_resposta[]
 }
 
 model Professor {
@@ -68,7 +69,6 @@ model Mensagem {
   professor         Professor @relation(fields: [professorID], references: [id])
   professorID       String
   createdAt         DateTime  @default(now())
-  
 }
 
 model Item {
@@ -104,6 +104,14 @@ model Atividade {
   aluno     Aluno?     @relation(fields: [alunoID], references: [id])
   turmaID   String?
   turma     Turma?     @relation(fields: [turmaID], references: [id])
+}
+
+model Atividade_resposta {
+  id         String    @id @default(uuid())
+  resposta   String
+  createdAt  DateTime  @default(now())
+  alunoID          String?
+  aluno            Aluno?            @relation(fields: [alunoID], references: [id])
 }
 
 model Missao {
