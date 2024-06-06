@@ -18,7 +18,7 @@ const Footer = () => {
           <Link href={`/home/`}>
             <HomeIcon color="white" />
           </Link>
-          <Link href={`/cadastros/cadastro_mensagem/`}>
+          <Link href={`/mensagens/`}>
             <Send color="white" />
           </Link>
         </div>
