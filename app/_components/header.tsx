@@ -3,6 +3,7 @@ import {
   ClipboardListIcon,
   HomeIcon,
   MenuIcon,
+  MessageSquareIcon,
   Send,
   UserPlus,
   UsersRound,
@@ -88,15 +89,17 @@ const Header = () => {
               </div>
             </Link>
 
+            <Link href={`/mensagens/`} >
             <div>
               <Button
                 variant={"default"}
                 className="w-full justify-start gap-2 text-white"
-              >
-                <BarChart4 size={16} />
-                Ranking
+                >
+                <MessageSquareIcon size={16} />
+                Mensagens
               </Button>
             </div>
+                </Link>
 
             <div>
               <Link href={`/home/`}>

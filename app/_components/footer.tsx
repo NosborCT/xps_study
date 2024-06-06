@@ -4,6 +4,7 @@ import {
   ClipboardListIcon,
   HomeIcon,
   Icon,
+  MessageSquareIcon,
   Send,
 } from "lucide-react";
 import { Card } from "./ui/card";
@@ -19,7 +20,7 @@ const Footer = () => {
             <HomeIcon color="white" />
           </Link>
           <Link href={`/mensagens/`}>
-            <Send color="white" />
+            <MessageSquareIcon color="white" />
           </Link>
         </div>
         <Button className="w-[68px] h-[68px] rounded-full">
