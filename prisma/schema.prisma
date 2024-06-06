@@ -63,11 +63,12 @@ model Turma {
 model Mensagem {
   id                String    @id @default(uuid())
   conteudo_mensagem String
-  professorID       String
-  professor         Professor @relation(fields: [professorID], references: [id])
-  createdAt         DateTime  @default(now())
-  alunoID           String
   aluno             Aluno     @relation(fields: [alunoID], references: [id])
+  alunoID           String
+  professor         Professor @relation(fields: [professorID], references: [id])
+  professorID       String
+  createdAt         DateTime  @default(now())
+  
 }
 
 model Item {
@@ -92,11 +93,11 @@ model Passe {
 }
 
 model Atividade {
-  id        String    @id @default(uuid())
+  id        String     @id @default(uuid())
   nome      String
   descricao String
   pontos    Int
-  createdAt DateTime  @default(now())
+  createdAt DateTime   @default(now())
   idCriador String?
   professor Professor? @relation(fields: [idCriador], references: [id])
   alunoID   String?
@@ -104,7 +105,6 @@ model Atividade {
   turmaID   String?
   turma     Turma?     @relation(fields: [turmaID], references: [id])
 }
-
 
 model Missao {
   id               String            @id @default(uuid())
@@ -114,13 +114,13 @@ model Missao {
   ativo            Boolean           @default(true)
   createdAt        DateTime          @default(now())
   professorID      String?
-  professor        Professor?         @relation(fields: [professorID], references: [id])
+  professor        Professor?        @relation(fields: [professorID], references: [id])
   alunoID          String?
-  aluno            Aluno?             @relation(fields: [alunoID], references: [id])
+  aluno            Aluno?            @relation(fields: [alunoID], references: [id])
   recompensaItemID String?
-  recompensaItem   Item?              @relation(fields: [recompensaItemID], references: [id])
+  recompensaItem   Item?             @relation(fields: [recompensaItemID], references: [id])
   turmaID          String?
-  turma            Turma?             @relation(fields: [turmaID], references: [id])
+  turma            Turma?            @relation(fields: [turmaID], references: [id])
   respostas        Missao_resposta[]
 }
 

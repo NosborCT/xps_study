@@ -7,7 +7,10 @@ interface AlunoItemProps{
 const AlunoItem = ({aluno}:AlunoItemProps) => {
     return (  
 
-        <span>{aluno.name}</span>
+        
+        <div>
+            {aluno.name}
+        </div>
 
     );
 }

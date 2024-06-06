@@ -1,3 +1,4 @@
+import AtividadeList from "../_components/atividade-list";
 import Footer from "../_components/footer";
 import Header from "../_components/header";
 import { Card } from "../_components/ui/card";
@@ -16,12 +17,8 @@ const Home = () => {
 
       <div className="flex-col space-y-6 flex items-center ">
         <div className="flex-col space-y-6">
-          <Card className="w-80 h-20 cursor-pointer bg-primary"></Card>
-          <Card className="w-80 h-20 cursor-pointer bg-primary"></Card>
-          <Card className="w-80 h-20 cursor-pointer bg-primary"></Card>
-          <Card className="w-80 h-20 cursor-pointer bg-primary"></Card>
-          <Card className="w-80 h-20 cursor-pointer bg-primary"></Card>
-          <Card className="w-80 h-20 cursor-pointer bg-primary"></Card>
+          <AtividadeList/>
+        
         </div>
         
       </div>

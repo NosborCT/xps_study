@@ -80,9 +80,11 @@ const CadastroProfessor = () => {
               />
             </div>
 
-            <Button type="submit" className="max-w-28 text-center">
-              Salvar
-            </Button>
+            <div className="flex justify-end">
+              <Button type="submit" className=" text-white max-w-28 text-center">
+                Salvar
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </form>

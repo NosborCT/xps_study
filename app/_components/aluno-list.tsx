@@ -7,7 +7,10 @@ const AlunoList = async ()  => {
 
         <>
             {alunos.map((aluno)=>(
+                
+                
                 <option key={aluno.id} value={aluno.id}>
+                   
                     {aluno.name}
                 </option>
             ))}

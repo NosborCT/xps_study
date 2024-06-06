@@ -13,7 +13,6 @@ import prisma from "@/app/_lib/prisma";
 import { redirect } from "next/navigation";
 
 const CadastroAluno = () => {
-
   async function createTask(formData: FormData) {
     "use server";
     const name = formData.get("name")?.toString();
@@ -35,13 +34,11 @@ const CadastroAluno = () => {
         },
       });
 
-      
       console.log("Aluno cadastrado com sucesso:", newTask);
-      
     } catch (error) {
       console.error("Erro ao cadastrar aluno:", error);
     }
-    redirect('/cadastros/cadastro_aluno/')
+    redirect("/cadastros/cadastro_aluno/");
   }
 
   return (
@@ -88,9 +85,11 @@ const CadastroAluno = () => {
               />
             </div>
 
-            <Button type="submit" className="max-w-28 text-center" >
-              Salvar
-            </Button>
+            <div className="flex justify-end">
+              <Button type="submit" className=" text-white max-w-28 text-center">
+                Salvar
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </form>

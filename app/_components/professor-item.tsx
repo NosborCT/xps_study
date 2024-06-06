@@ -1,16 +1,16 @@
+import { Professor } from "@prisma/client";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
-import  {Professor} from  "@prisma/client"
-
-interface ProfessorItemProps{
-    professor: Professor
+interface ProfessorItemProps {
+  professor: Professor;
 }
 
-const ProfessorItem = ({professor}: ProfessorItemProps) => {
-    return ( 
+const ProfessorItem = ({ professor }: ProfessorItemProps) => {
+  return (
+    <span>
+        {professor.name}
+    </span>
+  );
+};
 
-        <span>{professor.name}</span>
-
-     );
-}
- 
 export default ProfessorItem;

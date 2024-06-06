@@ -8,9 +8,8 @@ import { Textarea } from "@/app/_components/ui/textarea";
 import Header from "@/app/_components/header";
 import ProfessorList from "@/app/_components/professor-list";
 import AlunoList from "@/app/_components/aluno-list";
-import { connect } from "http2";
-import { Turma } from '@prisma/client';
 import TurmaList from "@/app/_components/turma-list";
+import { redirect } from "next/navigation";
 
 const CadastroAtividade = () => {
   async function createTask(formData: FormData) {
@@ -49,8 +48,10 @@ const CadastroAtividade = () => {
         },
       });
       console.log('Atividade cadastrada com sucesso:', newAtividade);
+      redirect('/')
     } catch (error) {
       console.error('Erro ao cadastrar atividade:', error);
+    
     }
   }
 
@@ -58,7 +59,7 @@ const CadastroAtividade = () => {
     <div>
       <Header />
       <form action={createTask}>
-        <Card className="mx-auto w-80 h-auto my-[230px]">
+        <Card className="mx-auto w-80 h-auto my-[150px]">
           <CardHeader className="flex items-center">
             <CardTitle>Cadastro de Atividade</CardTitle>
           </CardHeader>
@@ -118,14 +119,21 @@ const CadastroAtividade = () => {
                 <option value="5">5</option>
                 <option value="6">6</option>
                 <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
               </select>
             </div>
-            <Button type="submit" className="max-w-28 text-center">
-              Salvar
-            </Button>
+            <div className="flex justify-end">
+              <Button type="submit" className=" text-white max-w-28 text-center">
+                Salvar
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </form>
+    
+
     </div>
   );
 };

@@ -84,21 +84,37 @@ const CadastroTurma = () => {
                 className="bg-white drop-shadow-md"
               />
             </div>
-            <div>
-              <Label htmlFor="professor">Selecione o professor</Label>
-              <select id="professor" name="professor" className="bg-white drop-shadow-md">
-                <ProfessorList />
-              </select>
+            <div className="flex justify-between w-full space-x-4">
+              <div>
+                <select
+                  id="aluno"
+                  name="aluno"
+                  className="bg-primary drop-shadow-md w-full h-[33px] rounded-lg text-white cursor-pointer"
+                >
+                  <option value="" disabled selected className=" text-center">
+                    Aluno
+                  </option>
+                  <AlunoList />
+                </select>
+              </div>
+              <div>
+                <select
+                  id="professor"
+                  name="professor"
+                  className="bg-primary drop-shadow-md w-full h-[33px] rounded-lg text-white flex items-center cursor-pointer"
+                >
+                  <option value="" disabled selected className=" text-center">
+                    Professor
+                  </option>
+                  <ProfessorList />
+                </select>
+              </div>
             </div>
-            <div>
-              <Label htmlFor="aluno">Selecione o aluno</Label>
-              <select id="aluno" name="aluno" className="bg-white drop-shadow-md">
-                <AlunoList />
-              </select>
+            <div className="flex justify-end">
+              <Button type="submit" className=" text-white max-w-28 text-center">
+                Salvar
+              </Button>
             </div>
-            <Button type="submit" className="max-w-28 text-center">
-              Salvar
-            </Button>
           </CardContent>
         </Card>
       </form>
